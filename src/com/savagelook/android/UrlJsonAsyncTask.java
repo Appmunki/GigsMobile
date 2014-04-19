@@ -57,7 +57,7 @@ public class UrlJsonAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	
 	@Override 
 	protected void onPreExecute() {
-		progressDialog = ProgressDialog.show(
+		/*progressDialog = ProgressDialog.show(
 			this.context, 
 			this.loadingTitle, 
 			this.messageLoading, 
@@ -69,7 +69,7 @@ public class UrlJsonAsyncTask extends AsyncTask<String, Void, JSONObject> {
 					UrlJsonAsyncTask.this.cancel(true);
 				}
 			}
-		);
+		);*/
 	}
 	
 	@Override

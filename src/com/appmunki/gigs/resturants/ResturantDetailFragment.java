@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appmunki.gigs.R;
-import com.appmunki.gigs.R.id;
-import com.appmunki.gigs.R.layout;
-import com.appmunki.gigs.dummy.DummyContent;
 
 /**
  * A fragment representing a single Resturant detail screen. This fragment is
@@ -27,7 +24,7 @@ public class ResturantDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private DummyContent.DummyItem mItem;
+	private ResturantModel mItem;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +41,7 @@ public class ResturantDetailFragment extends Fragment {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
-			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
+			mItem = ResturantModel.readResturants(getActivity()).get(getArguments().getInt(
 					ARG_ITEM_ID));
 		}
 	}
@@ -58,7 +55,7 @@ public class ResturantDetailFragment extends Fragment {
 		// Show the dummy content as text in a TextView.
 		if (mItem != null) {
 			((TextView) rootView.findViewById(R.id.resturant_detail))
-					.setText(mItem.content);
+					.setText(mItem.getTitle());
 		}
 
 		return rootView;

@@ -1,8 +1,15 @@
 package com.appmunki.gigs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,6 +19,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,7 +30,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.appmunki.gigs.dummy.DummyContentModel;
 import com.appmunki.gigs.resturants.ResturantListActivity;
 import com.appmunki.gigs.resturants.ResturantModel;
 import com.orm.androrm.DatabaseAdapter;
@@ -46,12 +56,11 @@ public class LoginActivity extends Activity {
 	 */
 	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
-	private static final String LOGIN_API_ENDPOINT_URL = "http://192.168.1.10:3000/api/v1/sessions.json";
+	private static final String LOGIN_API_ENDPOINT_URL = "http://whispering-garden-3176.herokuapp.com/api/v1/sessions.json";
 
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
-	private UserLoginTask mAuthTask = null;
+	private static final boolean debugging = true;
+
+	
 
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
@@ -63,6 +72,9 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+
+	//Contains informations about the current user
+	private SharedPreferences mCurrentUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +112,16 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+	    mCurrentUser = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (mCurrentUser.contains("AuthToken")&!debugging) {
+	        startActivity(new Intent(this,ResturantListActivity.class));
+	    } 
 	}
 
 	@Override
@@ -115,10 +137,7 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		if (mAuthTask != null) {
-			return;
-		}
-
+		
 		// Reset errors.
 		mEmailView.setError(null);
 		mPasswordView.setError(null);
@@ -135,7 +154,7 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
+		} else if (mPassword.length() < 8) {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
@@ -161,10 +180,10 @@ public class LoginActivity extends Activity {
 			// perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
-			mAuthTask = new UserLoginTask(this);
-		    mAuthTask.setMessageLoading("Logging in...");
-		    mAuthTask.execute(LOGIN_API_ENDPOINT_URL);
-			//mAuthTask.execute((Void) null);
+			
+		    LoginTask loginTask = new LoginTask(LoginActivity.this);
+	        //loginTask.setMessageLoading("Logging in...");
+	        loginTask.execute(LOGIN_API_ENDPOINT_URL);
 		}
 	}
 
@@ -213,38 +232,89 @@ public class LoginActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends UrlJsonAsyncTask {
+	public class LoginTask extends UrlJsonAsyncTask {
 		
 
-		public UserLoginTask(Context context) {
+		public LoginTask(Context context) {
 			super(context);
 			// TODO Auto-generated constructor stub
 		}
+	    @Override
+	    protected JSONObject doInBackground(String... urls) {
+	        DefaultHttpClient client = new DefaultHttpClient();
+	        HttpPost post = new HttpPost(urls[0]);
+	        JSONObject holder = new JSONObject();
+	        JSONObject userObj = new JSONObject();
+	        String response = null;
+	        JSONObject json = new JSONObject();
 
+	        try {
+	            try {
+	                // setup the returned values in case
+	                // something goes wrong
+	                json.put("success", false);
+	                json.put("info", "Something went wrong. Retry!");
+	                // add the user email and password to
+	                // the params
+	                userObj.put("email", mEmail);
+	                userObj.put("password", mPassword);
+	                holder.put("user", userObj);
+	                StringEntity se = new StringEntity(holder.toString());
+	                post.setEntity(se);
+
+	                // setup the request headers
+	                post.setHeader("Accept", "application/json");
+	                post.setHeader("Content-Type", "application/json");
+
+	                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+	                response = client.execute(post, responseHandler);
+	                json = new JSONObject(response);
+
+	            } catch (HttpResponseException e) {
+	                e.printStackTrace();
+	                Log.e("ClientProtocol", "" + e);
+	                json.put("info", "Email and/or password are invalid. Retry!");
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                Log.e("IO", "" + e);
+	            }
+	        } catch (JSONException e) {
+	            e.printStackTrace();
+	            Log.e("JSON", "" + e);
+	        }
+
+	        return json;
+	    }
 		@Override
 		protected void onPostExecute(JSONObject json) {
-			Log.i("TAG",json.toString());
-			mAuthTask = null;
-			showProgress(false);
-			
+			Log.i("Http", json.toString());
 			try {
-				if (json.has("sucess")&&json.getBoolean("success")) {
-					startActivity(new Intent(LoginActivity.this,ResturantListActivity.class));
-					finish();
-				} else {
-					mPasswordView
-							.setError(getString(R.string.error_incorrect_password));
-					mPasswordView.requestFocus();
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	            if (json.getBoolean("success")) {
+	                // everything is ok
+	                SharedPreferences.Editor editor = mCurrentUser.edit();
+	                // save the returned auth_token into
+	                // the SharedPreferences
+	                editor.putString("AuthToken", json.getJSONObject("data").getString("auth_token"));
+	                editor.commit();
+
+	                // launch the HomeActivity and close this one
+	                Intent intent = new Intent(getApplicationContext(), ResturantListActivity.class);
+	                startActivity(intent);
+	                finish();
+	            }
+	            Toast.makeText(context, json.getString("info"), Toast.LENGTH_LONG).show();
+	        } catch (Exception e) {
+	            // something went wrong: show a Toast
+	            // with the exception message
+	            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+	        } finally {
+				showProgress(false);
+	            super.onPostExecute(json);
+	        }
 		}
 
 		@Override
 		protected void onCancelled() {
-			mAuthTask = null;
 			showProgress(false);
 		}
 	}
@@ -255,8 +325,11 @@ public class LoginActivity extends Activity {
 		models.add(ResturantModel.class);
 
 		DatabaseAdapter.setDatabaseName("StoreFrontDB");
-		DatabaseAdapter adapter = new DatabaseAdapter(getApplicationContext());
+		DatabaseAdapter adapter = DatabaseAdapter.getInstance(getApplicationContext());
 		adapter.setModels(models);
+		
+		//Create Dummy Content
+		DummyContentModel.createDummyContent(this);
 	}
 	
 }
