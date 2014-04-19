@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gigs</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_resturant_list">Resturants</string>
+    <string name="title_resturant_detail">Resturant Detail</string>
+
+</resources>
