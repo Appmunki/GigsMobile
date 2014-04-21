@@ -149,22 +149,23 @@ public final class R {
         public static final int ic_launcher=0x7f020079;
     }
     public static final class id {
-        public static final int action_forgot_password=0x7f09000a;
-        public static final int action_settings=0x7f09000b;
+        public static final int action_forgot_password=0x7f09000b;
+        public static final int action_settings=0x7f09000c;
         public static final int email=0x7f090003;
         public static final int login=0x7f090005;
         public static final int login_form=0x7f090002;
         public static final int login_status=0x7f090000;
         public static final int login_status_message=0x7f090001;
         public static final int password=0x7f090004;
-        public static final int resturant_detail=0x7f090009;
-        public static final int resturant_detail_container=0x7f090007;
-        public static final int resturant_list=0x7f090008;
+        public static final int register_button=0x7f090007;
+        public static final int resturant_detail=0x7f09000a;
+        public static final int resturant_detail_container=0x7f090008;
+        public static final int resturant_list=0x7f090009;
         public static final int sign_in_button=0x7f090006;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
-        public static final int activity_resturant_detail=0x7f030001;
+        public static final int activity_restaurant_detail=0x7f030001;
         /** 
     Layout alias to replace the single-pane version of the layout with a
     two-pane version on Large screens.
@@ -180,28 +181,31 @@ public final class R {
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     
          */
-        public static final int activity_resturant_list=0x7f030002;
-        public static final int activity_resturant_twopane=0x7f030003;
+        public static final int activity_restaurant_list=0x7f030002;
+        public static final int activity_restaurant_twopane=0x7f030003;
         public static final int activity_sign_in=0x7f030004;
         public static final int foodietheme_tab_indicator_holo=0x7f030005;
-        public static final int fragment_resturant_detail=0x7f030006;
+        public static final int fragment_restaurant_detail=0x7f030006;
     }
     public static final class menu {
         public static final int login=0x7f080000;
         public static final int sign_in=0x7f080001;
     }
     public static final class string {
-        public static final int action_forgot_password=0x7f06000b;
+        public static final int action_forgot_password=0x7f06000d;
+        public static final int action_register=0x7f06000b;
         public static final int action_settings=0x7f060001;
+        public static final int action_sign_in=0x7f06000a;
         public static final int action_sign_in_register=0x7f060009;
-        public static final int action_sign_in_short=0x7f06000a;
+        public static final int action_sign_in_short=0x7f06000c;
         public static final int app_name=0x7f060000;
-        public static final int error_field_required=0x7f060010;
-        public static final int error_incorrect_password=0x7f06000f;
-        public static final int error_invalid_email=0x7f06000d;
-        public static final int error_invalid_password=0x7f06000e;
+        public static final int error_field_required=0x7f060013;
+        public static final int error_incorrect_password=0x7f060012;
+        public static final int error_invalid_email=0x7f060010;
+        public static final int error_invalid_password=0x7f060011;
         public static final int hello_world=0x7f060002;
-        public static final int login_progress_signing_in=0x7f06000c;
+        public static final int login_progress_registering=0x7f06000f;
+        public static final int login_progress_signing_in=0x7f06000e;
         public static final int prompt_email=0x7f060007;
         /**  Strings related to login 
          */

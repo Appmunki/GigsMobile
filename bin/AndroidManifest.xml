@@ -15,24 +15,16 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/FoodieTheme" >
+       
         <activity
-            android:name="com.appmunki.gigs.SignInActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.appmunki.gigs.resturants.ResturantListActivity"
+            android:name="com.appmunki.gigs.restaurant.RestaurantListActivity"
             android:label="@string/title_resturant_list"
             android:theme="@style/FoodieTheme" >
         </activity>
         <activity
-            android:name="com.appmunki.gigs.resturants.ResturantDetailActivity"
+            android:name="com.appmunki.gigs.restaurant.RestaurantDetailActivity"
             android:label="@string/title_resturant_detail"
-            android:parentActivityName="com.appmunki.gigs.resturants.ResturantListActivity"
+            android:parentActivityName="com.appmunki.gigs.restaurant.RestaurantListActivity"
             android:theme="@style/FoodieTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +33,7 @@
         <activity
             android:name="com.appmunki.gigs.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustResize|stateVisible"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

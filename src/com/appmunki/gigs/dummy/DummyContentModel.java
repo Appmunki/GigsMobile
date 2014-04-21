@@ -2,7 +2,7 @@ package com.appmunki.gigs.dummy;
 
 import android.content.Context;
 
-import com.appmunki.gigs.resturants.ResturantModel;
+import com.appmunki.gigs.restaurant.RestaurantModel;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -15,15 +15,15 @@ public class DummyContentModel {
 
 	public static void createDummyContent(Context context) {
 		// Add 3 sample items.
-		if (ResturantModel.readResturants(context).isEmpty()) {
+		if (RestaurantModel.readResturants(context).isEmpty()) {
 
-			new ResturantModel("First Resturant", "Test Description", 4.0, 0.0)
+			new RestaurantModel("First Resturant", "Test Description", 4.0, 0.0)
 					.save(context, 0);
-			new ResturantModel("First Resturant", "Test Description", 4.0, 0.0)
+			new RestaurantModel("First Resturant", "Test Description", 4.0, 0.0)
 					.save(context, 0);
-			new ResturantModel("First Resturant", "Test Description", 4.0, 0.0)
+			new RestaurantModel("First Resturant", "Test Description", 4.0, 0.0)
 					.save(context, 0);
-			new ResturantModel("First Resturant", "Test Description", 4.0, 0.0)
+			new RestaurantModel("First Resturant", "Test Description", 4.0, 0.0)
 					.save(context, 0);
 
 		}
