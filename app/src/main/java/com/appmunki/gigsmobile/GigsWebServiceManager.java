@@ -73,6 +73,7 @@ public class GigsWebServiceManager {
      * Adapter use for using a rest api
      */
     private static RestAdapter restAdapter = new RestAdapter.Builder()
+
             .setEndpoint(API_URL)
             .setLog(log)
             .setLogLevel(FULL)
