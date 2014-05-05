@@ -1,7 +1,13 @@
 package com.appmunki.gigsmobile.models;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.io.InputStream;
+import java.util.Random;
 
 /**
  * Created by radzell on 4/27/14.
@@ -56,4 +62,22 @@ public class Gig implements Parcelable {
             return new Gig[size];
         }
     };
+
+
+    public Bitmap getPicture(Context context){
+        Random random = new Random();
+
+        Bitmap bitmap=null;
+        // load image
+        try {
+            // get input stream
+            InputStream ims = context.getAssets().open("gig"+random.nextInt(5)+".jpg");
+            bitmap= BitmapFactory.decodeStream(ims);
+
+        }
+        catch(Exception ex) {
+
+        }
+        return bitmap;
+    }
 }

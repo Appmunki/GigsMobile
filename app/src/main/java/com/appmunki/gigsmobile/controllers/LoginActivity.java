@@ -2,7 +2,6 @@ package com.appmunki.gigsmobile.controllers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -52,11 +51,6 @@ import static com.appmunki.gigsmobile.helpers.Utils.IntoString;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     /**
-     * class tag
-     */
-    private String TAG = this.getClass().getSimpleName();
-
-    /**
      * Represents an asynchronous signup task used to register
      * the user.
      */
@@ -66,7 +60,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         public void success(Response response, Response response2) {
-            showProgress(false);
+            showProgress(false, "");
 
             Gson gson = new Gson();
 
@@ -95,7 +89,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             //sending the user and starting the userdetailactivity
             //TODO remove this later
-            Log.i(TAG,user.toString());
+            Log.i(TAG, user.toString());
 
             Intent intent = new Intent(getApplicationContext(), UserDetailActivity.class);
             intent.putExtra("user", user);
@@ -113,7 +107,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 mEmailView.setError(error.getLocalizedMessage());
                 mPasswordView.requestFocus();
             }
-            showProgress(false);
+            showProgress(false, "");
         }
     };
     /**
@@ -131,7 +125,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
          */
         @Override
         public void success(Response response, Response response2) {
-            showProgress(false);
+            showProgress(false, "");
 
             Gson gson = new Gson();
 
@@ -182,12 +176,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
-            showProgress(false);
+            showProgress(false, "");
 
         }
 
     };
-
     /**
      * UI references.
      */
@@ -203,8 +196,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     View mProgressView;
     @InjectView(R.id.login_form)
     View mLoginFormView;
-
-
+    @InjectView(R.id.login_status_message)
+    TextView mLoginStatus;
+    /**
+     * class tag
+     */
+    private String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,7 +308,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            String title = getResources().getString(R.string.logging_in);
+
+            showProgress(true, title);
             GigsWebServiceManager.getService().login(new User(email, password, type), LoginCallBack);
         }
     }
@@ -391,7 +390,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            String title = getResources().getString(R.string.signing_up);
+
+            showProgress(true, title);
             GigsWebServiceManager.getService().register(new User(email, password, passwordconfirmation, type), RegisterCallBack);
         }
     }
@@ -411,8 +412,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public void showProgress(final boolean show) {
+    public void showProgress(final boolean show, String title) {
+        mLoginStatus.setText(title);
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
@@ -482,6 +483,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
      * Adds to email to the emailEdittext
+     *
      * @param emailAddressCollection a collection of typically used email address
      */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {

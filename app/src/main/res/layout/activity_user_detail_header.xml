@@ -6,16 +6,11 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/im"
-        android:id="@+id/imageView"
-        android:contentDescription="user_detail_image" />
+        android:src="@drawable/user1"
+        android:id="@+id/userimageView"
+        android:contentDescription="userimageView"
+        android:scaleType="centerCrop" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/ima"
-        android:scaleType="fitXY" />
 
     <TextView
         android:layout_width="wrap_content"

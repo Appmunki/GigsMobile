@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.appmunki.gigsmobile.R;
 
 public class GigDetailActivity extends Activity {
@@ -12,6 +13,7 @@ public class GigDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gig_detail);
+
     }
 
 

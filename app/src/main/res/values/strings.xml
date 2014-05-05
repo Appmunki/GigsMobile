@@ -24,5 +24,11 @@
     <string name="employer">Employer</string>
     <string name="title_activity_user_detail">UserDetail</string>
     <string name="title_activity_gig_detail">GigDetailActivity</string>
+    <string name="logging_in">Signing In</string>
+    <string name="signing_up">Signing Up</string>
+    <string name="title_activity_create_gig_form">CreateGigFormActivity</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
 
 </resources>

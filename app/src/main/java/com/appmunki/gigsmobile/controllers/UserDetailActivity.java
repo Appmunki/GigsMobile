@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +21,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -43,8 +44,8 @@ public class UserDetailActivity extends Activity {
      */
     @InjectView(R.id.gigslistView)
     ListView mGigsListView;
-    @InjectView(R.id.useremailtextView)
-    TextView mUserEmailTextView;
+    //@InjectView(R.id.useremailtextView)
+    //TextView mUserEmailTextView;
 
     /**
      * Gigs adapter
@@ -82,14 +83,16 @@ public class UserDetailActivity extends Activity {
             boolean success = resp.getAsJsonPrimitive("success").getAsBoolean();
             String info = resp.getAsJsonPrimitive("info").getAsString();
 
+            Log.i(TAG,"size:"+gigsList.size());
+
             mGigAdapter.addAll(gigsList);
             mGigAdapter.notifyDataSetChanged();
 
-            Log.i(TAG,gigsList.get(0).toString());
         }
 
         @Override
         public void failure(RetrofitError error) {
+
             Toast.makeText(getBaseContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
     };
@@ -98,25 +101,37 @@ public class UserDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FadingActionBarHelper helper = new FadingActionBarHelper()
-                .actionBarBackground(R.drawable.ab_background)
-                .headerLayout(R.layout.activity_user_detail_header)
-                .contentLayout(R.layout.activity_user_detail);
-        setContentView(helper.createView(this));
-        helper.initActionBar(this);
+
+        setContentView(R.layout.activity_user_detail);
         ButterKnife.inject(this);
 
+
         User user = getIntent().getParcelableExtra("user");
+        addUserHeader(user);
+
         Log.i(TAG,user.toString());
 
-        mUserEmailTextView.setText(user.getEmail());
 
-        mGigAdapter = new GigAdapter(this,0,new ArrayList<Gig>());
+        ArrayList<Gig> gigsList = new ArrayList<Gig>();
+        mGigAdapter = new GigAdapter(this,android.R.layout.simple_list_item_1,gigsList);
+        mGigsListView.setAdapter(mGigAdapter);
         //Load the initial gigs
         GigsWebServiceManager.getService().getUserGigs(user.getEmail(),user.getAuthToken(), ListGigsCallback);
 
 
     }
+
+    private void addUserHeader(User user) {
+        View header = this.getLayoutInflater().inflate(R.layout.activity_user_detail_header, null, false);
+        mGigsListView.addHeaderView(header);
+
+        TextView userNameTextView = (TextView) header.findViewById(R.id.useremailtextView);
+        ImageView userImageView = (ImageView) header.findViewById(R.id.userimageView);
+
+        userImageView.setImageBitmap(user.getPicture(this));
+        userNameTextView.setText(user.getEmail());
+    }
+
     @OnItemClick(R.id.gigslistView)
     void onGigItemSelected(int position) {
         Intent intent = new Intent(this,GigDetailActivity.class);
