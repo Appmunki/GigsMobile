@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/gig_list_height"
+    android:background="@drawable/card_background">
+
+
+    <com.appmunki.gigsmobile.views.SquareImageView
+        android:id="@+id/gigimageView"
+        android:layout_width="@dimen/gig_list_height"
+        android:layout_height="@dimen/gig_list_height"
+        android:layout_alignParentRight="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/deathtostock_wired2"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/gigtitletextView"
+        tools:text="I need someone to walk to dog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/gigimageView"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <TextView
+        android:id="@+id/giglocationtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        tools:text="431 Worster Ave. Hampton, Va"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:layout_toRightOf="@+id/gigimageView"
+        android:layout_below="@+id/gigtitletextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="Jan 4, 2014 at 8:00am"
+        android:id="@+id/giglastupdatedtextView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/gigtitletextView" />
+
+    <TextView
+        android:id="@+id/gigpricetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        tools:text="$5"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/green" />
+</RelativeLayout>

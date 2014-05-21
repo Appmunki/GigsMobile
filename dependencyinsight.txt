@@ -1,0 +1,2 @@
+How you find clashes in dependicies
+gradle -q app:dependencies

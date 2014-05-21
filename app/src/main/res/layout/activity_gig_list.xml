@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.GigListActivity">
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gigslistView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:headerDividersEnabled="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        tools:listitem="@layout/gig_list_item"
+        tools:listheader="@layout/activity_gig_list_header"/>
+
+</RelativeLayout>
