@@ -30,5 +30,44 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="location">Location</string>
+    <string name="signinas">Sign In As...</string>
+    <string name="mygigs">My Gigs</string>
+    <string name="action_create_gig">Create Gig</string>
+    <string name="budget">Budget</string>
+    <string name="action_create">Create</string>
+
+    <string-array name="user_type_array">
+        <item>Employer</item>
+        <item>Worker</item>
+    </string-array>
+    <string-array name="drawer_menu">
+        <item>Login</item>
+        <item>My Gigs</item>
+        <item>User Settings</item>
+    </string-array>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+    <string-array name="drawer_array">
+        <item>Login</item>
+        <item>My Gigs</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">search</string>
+    <string name="title_activity_gig_messages">GigMessagesActivity</string>
+    <string name="signuporsignin">Sign up or Sign in</string>
+    <string name="action_messages">Messages</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_message">MessageActivity</string>
 
 </resources>

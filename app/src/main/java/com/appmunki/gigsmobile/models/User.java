@@ -13,6 +13,7 @@ import java.util.Random;
  * Created by radzell on 4/27/14.
  */
 public class User implements Parcelable {
+    private int id;
     private String email;
     private String password;
     private String password_confirmation;
@@ -20,6 +21,7 @@ public class User implements Parcelable {
     private String type;
 
     public User(Parcel in){
+        id = in.readInt();
         email = in.readString();
         password = in.readString();
         password_confirmation = in.readString();
@@ -27,14 +29,17 @@ public class User implements Parcelable {
         type = in.readString();
     }
     public User(){
-
+        Random random = new Random();
+        id = random.nextInt(2);
     }
     public User(String pEmail, String pPassword, String pType) {
+        this();
         this.email = pEmail;
         this.password = pPassword;
         this.type = pType;
     }
     public User(String pEmail, String pPassword,String pPassword_confirmation, String pType) {
+        this();
         this.email = pEmail;
         this.password = pPassword;
         this.password_confirmation = pPassword_confirmation;
@@ -52,6 +57,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
         out.writeString(email);
         out.writeString(password);
         out.writeString(password_confirmation);
@@ -93,5 +99,9 @@ public class User implements Parcelable {
 
         }
         return bitmap;
+    }
+
+    public int getId() {
+        return id;
     }
 }

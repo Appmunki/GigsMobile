@@ -8,46 +8,55 @@
         android:label="@string/app_name"
         android:theme="@style/GigTheme" >
         <activity
-            android:name="com.appmunki.gigsmobile.controllers.MainActivity"
+            android:name=".controllers.activities.MainActivity"
             android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name="com.appmunki.gigsmobile.controllers.activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.appmunki.gigsmobile.controllers.activities.GigListActivity"
+            android:label="@string/mygigs" >
+        </activity>
 
-
         <activity
-            android:name="com.appmunki.gigsmobile.controllers.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
-            android:name="com.appmunki.gigsmobile.controllers.UserDetailActivity"
-            android:label="@string/title_activity_user_detail" >
-        </activity>
-        <activity
-            android:name="com.appmunki.gigsmobile.controllers.GigDetailActivity"
-            android:label="@string/title_activity_gig_detail" >
-        </activity>
-        <activity
-            android:name="com.appmunki.gigsmobile.controllers.CreateGigFormActivity"
+            android:name="com.appmunki.gigsmobile.controllers.activities.GigCreateActivity"
             android:label="@string/title_activity_create_gig_form"
-            android:parentActivityName="com.appmunki.gigsmobile.UserDetailActivity" >
+            android:parentActivityName="com.appmunki.gigsmobile.controllers.activities.GigListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="UserDetailActivity" />
+                android:value="GigListActivity" />
         </activity>
+
+
+        <service
+            android:name="com.appmunki.gigsmobile.controllers.services.MessageService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".controllers.activities.MessagingActivity"
+            android:label="@string/title_activity_message" >
+        </activity>
+
     </application>
+
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- To retrieve the account name (email) as part of sign-in: -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>

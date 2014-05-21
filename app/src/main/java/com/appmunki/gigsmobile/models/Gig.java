@@ -13,16 +13,27 @@ import java.util.Random;
  * Created by radzell on 4/27/14.
  */
 public class Gig implements Parcelable {
+    private int id;
     private String title;
     private String description;
     private String status;
+    private float lat;
+    private float longit;
+
     private int employer_id;
     private String updated_at;
+    private User mWorker;
 
     public Gig(){
+        //TODO: remove after testing
+        Random random = new Random();
+        id = random.nextInt(3);
 
+        lat = random.nextFloat()*200;
+        longit = random.nextFloat()*200;
     }
     public Gig(Parcel in){
+        id = in.readInt();
         title = in.readString();
         description = in.readString();
         status = in.readString();
@@ -45,6 +56,7 @@ public class Gig implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
         out.writeString(title);
         out.writeString(description);
         out.writeString(status);
@@ -71,7 +83,7 @@ public class Gig implements Parcelable {
         // load image
         try {
             // get input stream
-            InputStream ims = context.getAssets().open("gig"+random.nextInt(5)+".jpg");
+            InputStream ims = context.getAssets().open("gig"+id+".jpg");
             bitmap= BitmapFactory.decodeStream(ims);
 
         }
@@ -80,4 +92,25 @@ public class Gig implements Parcelable {
         }
         return bitmap;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPrice() {
+        return 0;
+    }
+
+    public User getWorker() {
+        return mWorker;
+    }
+
+    public void setLocation(float latitude, float longitude){
+        this.lat = latitude;
+        this.longit = longitude;
+    }
+    public float getLongitude(){return longit;}
+    public float getLatitude(){return lat;}
+    
+
 }

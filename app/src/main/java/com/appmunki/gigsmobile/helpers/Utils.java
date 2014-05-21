@@ -9,6 +9,11 @@ import java.util.Random;
  * Created by radzell on 5/1/14.
  */
 public class Utils {
+    public static String ARG_USER_EMAIL = "useremail";
+    public static String ARG_USER="user";
+    public static String ARG_CURRENT_GIG="current_gig";
+    public static String ARG_GIG="gig";
+
     public static String IntoString(InputStream in){
         try {
             BufferedReader r = new BufferedReader(new InputStreamReader(in));

@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-
-    tools:context="com.appmunki.gigsmobile.controllers.LoginActivity">
+    tools:context="com.appmunki.gigsmobile.controllers.activities.LoginActivity">
 
     <!-- Login progress -->
 
@@ -22,7 +21,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="?android:attr/actionBarSize"
         android:orientation="vertical"
         android:baselineAligned="false"
         android:background="@drawable/card_background">
@@ -80,7 +79,7 @@
             android:orientation="vertical">
 
             <AutoCompleteTextView
-                android:id="@+id/email"
+                android:id="@+id/login_activity_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
@@ -89,10 +88,10 @@
                 android:singleLine="true" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/login_activity_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/email"
+                android:layout_below="@+id/login_activity_email"
                 android:hint="@string/prompt_password"
                 android:imeActionId="10"
                 android:imeActionLabel="@string/action_sign_in_short"
@@ -102,10 +101,10 @@
                 android:singleLine="true" />
 
             <EditText
-                android:id="@+id/passwordconfirm"
+                android:id="@+id/login_activity_passwordconfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/password"
+                android:layout_below="@+id/login_activity_password"
                 android:hint="@string/prompt_password_confirm"
                 android:imeActionId="11"
                 android:imeActionLabel="@string/action_sign_in_short"
@@ -114,41 +113,36 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/type_spinner"
+                android:layout_below="@+id/login_activity_passwordconfirm"
+                android:prompt="@string/signinas" />
+
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/login_activity_email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passwordconfirm"
+                android:layout_below="@+id/type_spinner"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_login"
                 android:textStyle="bold"
                 android:textColor="#FFF" />
 
             <Button
-                android:id="@+id/email_sign_up_button"
+                android:id="@+id/login_activity_email_sign_up_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passwordconfirm"
+                android:layout_below="@+id/type_spinner"
                 android:layout_marginTop="16dp"
-                android:layout_toRightOf="@+id/email_sign_in_button"
+                android:layout_toRightOf="@+id/login_activity_email_sign_in_button"
                 android:text="@string/action_sign_up"
                 android:textStyle="bold"
                 android:singleLine="false"
                 android:textColor="#FFF" />
-
-            <Switch
-                android:id="@+id/typeswitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:layout_alignRight="@+id/passwordconfirm"
-                android:layout_below="@+id/passwordconfirm"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:textOff="@string/employer"
-                android:textOn="@string/worker" />
 
         </RelativeLayout>
     </ScrollView>

@@ -40,6 +40,7 @@ public class GigsWebServiceManager {
         public void intercept(RequestFacade request) {
             request.addHeader("Accept", "application/json");
             request.addHeader("Content-Type","application/json");
+
         }
     };
 
@@ -58,7 +59,7 @@ public class GigsWebServiceManager {
     /**
      * Location of the webserver
      */
-    private static String API_URL = "http://gigsbackend.herokuapp.com/api/v1";
+    public static String API_URL = "http://gigsbackend.herokuapp.com/api/v1";
 
     /**
      * Logger for the api
@@ -68,6 +69,7 @@ public class GigsWebServiceManager {
             Log.i(TAG,message);
         }
     };
+
 
     /**
      * Adapter use for using a rest api
@@ -87,6 +89,7 @@ public class GigsWebServiceManager {
         return gigsWebService;
     }
 
+
     public interface GigsWebService {
         /**
          * User rest calls
@@ -103,13 +106,21 @@ public class GigsWebServiceManager {
         );
 
         /**
-         * Get request to retrieve gigs from an user
+         * Get request to retrieve gigs from an user asynschronsly
          * @param email email of the gig owner
          * @param authorization auth_token of the gig owner
          * @param cb callback of the webservice request
          */
         @GET("/gigs")
         void getUserGigs(@Header("X-User-Email") String email,@Header("X-User-Token") String authorization, Callback<Response> cb);
+
+        /**
+         * Get request to retrieve gigs from an user
+         * @param email email of the gig owner
+         * @param authorization auth_token of the gig owner
+         */
+        @GET("/gigs")
+        Response getUserGigs(@Header("X-User-Email") String email,@Header("X-User-Token") String authorization);
 
         /**
          * Workers rest calls
