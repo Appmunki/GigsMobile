@@ -8,12 +8,11 @@
         android:label="@string/app_name"
         android:theme="@style/GigTheme" >
         <activity
-            android:name=".controllers.activities.MainActivity"
+            android:name=".controllers.MainActivity"
             android:label="@string/app_name" >
-
         </activity>
         <activity
-            android:name="com.appmunki.gigsmobile.controllers.activities.LoginActivity"
+            android:name=".controllers.LoginActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,31 +21,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.appmunki.gigsmobile.controllers.activities.GigListActivity"
+            android:name=".controllers.GigListActivity"
             android:label="@string/mygigs" >
         </activity>
-
         <activity
-            android:name="com.appmunki.gigsmobile.controllers.activities.GigCreateActivity"
+            android:name=".controllers.GigCreateActivity"
             android:label="@string/title_activity_create_gig_form"
-            android:parentActivityName="com.appmunki.gigsmobile.controllers.activities.GigListActivity" >
+            android:parentActivityName=".controllers.GigListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="GigListActivity" />
         </activity>
 
-
         <service
-            android:name="com.appmunki.gigsmobile.controllers.services.MessageService"
+            android:name=".controllers.MessageService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
         <activity
-            android:name=".controllers.activities.MessagingActivity"
+            android:name=".controllers.MessagingActivity"
             android:label="@string/title_activity_message" >
         </activity>
 
+        <service
+            android:name=".controllers.SyncService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service android:name="AccountAuthenticatorService"
+                 android:exported="true" android:process=":auth">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                       android:resource="@xml/authenticator" />
+        </service>
     </application>
 
     <!-- To access Google+ APIs: -->

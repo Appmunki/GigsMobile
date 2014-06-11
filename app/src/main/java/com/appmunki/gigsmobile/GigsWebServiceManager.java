@@ -44,6 +44,7 @@ public class GigsWebServiceManager {
         }
     };
 
+
     /**
      *
      */
@@ -83,7 +84,7 @@ public class GigsWebServiceManager {
             .build();
     private static GigsWebService gigsWebService = null;
 
-    public static GigsWebService getService(){
+    public static GigsWebService getInstance(){
         if(gigsWebService==null)
             gigsWebService = restAdapter.create(GigsWebService.class);
         return gigsWebService;
@@ -121,6 +122,7 @@ public class GigsWebServiceManager {
          */
         @GET("/gigs")
         Response getUserGigs(@Header("X-User-Email") String email,@Header("X-User-Token") String authorization);
+
 
         /**
          * Workers rest calls

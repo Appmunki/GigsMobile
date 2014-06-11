@@ -4,8 +4,10 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.1.0'
+        classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
+        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
 
@@ -19,9 +21,12 @@ allprojects {
 
 apply plugin: 'android'
 apply plugin: 'hugo'
+apply plugin: 'android-test'
+
+
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.3'
+    buildToolsVersion '19.1'
 
     defaultConfig {
         minSdkVersion 14
@@ -36,7 +41,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug{
-            packageNameSuffix '.debug'
+            applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
         }
     }
@@ -71,12 +76,15 @@ dependencies {
     debugCompile 'com.squareup.retrofit:retrofit-mock:1.5.0'
 
     compile files('libs/sinch-android-rtc-3.0.0.jar')
-
+    compile files('libs/androrm.jar')
     androidTestCompile 'org.mockito:mockito-all:+'
     androidTestCompile ('com.jakewharton.espresso:espresso:1.1-r3'){
         exclude module: 'hamcrest-core'
 
     }
+    androidTestCompile 'org.robolectric:robolectric:2.1.+'
+
+
 
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'com.jakewharton.timber:timber:2.2.2'
@@ -86,4 +94,6 @@ dependencies {
     compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2@aar'
     compile 'com.squareup:otto:1.3.4@jar'
     compile 'com.google.code.gson:gson:2.2.+'
+    compile "com.j256.ormlite:ormlite-android:4.45"
+
 }
