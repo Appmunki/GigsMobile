@@ -3,11 +3,13 @@ package com.appmunki.gigsmobile.controllers;
 import android.app.Activity;
 
 import com.appmunki.gigsmobile.helpers.BusProvider;
+import com.appmunki.gigsmobile.helpers.DatabaseHelper;
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
 /**
  * Created by radzell on 5/29/14.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends OrmLiteBaseActivity<DatabaseHelper>{
     @Override
     protected void onResume() {
         super.onResume();

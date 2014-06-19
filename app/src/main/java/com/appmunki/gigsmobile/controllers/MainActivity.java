@@ -69,7 +69,8 @@ import butterknife.InjectView;
  * An action should be an operation performed on the current contents of the window,
  * for example enabling or disabling a data overlay on top of the current content.</p>
  */
-public class MainActivity extends Activity implements GigListFragment.OnGigListInteractionListener, FragmentManager.OnBackStackChangedListener, GigDetailFragment.OnGigDetailInteractionListener {
+public class MainActivity extends BaseActivity implements GigListFragment
+        .OnGigListInteractionListener, FragmentManager.OnBackStackChangedListener, GigDetailFragment.OnGigDetailInteractionListener {
     private static final String TAG = "MainActivity";
     public ActionBarDrawerToggle mDrawerToggle;
     //layout ui
