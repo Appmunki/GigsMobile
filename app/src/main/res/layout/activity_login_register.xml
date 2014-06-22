@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.appmunki.gigsmobile.controllers.LoginActivity">
+    tools:context="com.appmunki.gigsmobile.controllers.activities.LoginActivity">
 
     <!-- Login progress -->
 
@@ -85,7 +85,8 @@
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="admin@example.com" />
 
             <EditText
                 android:id="@+id/login_activity_password"
@@ -98,7 +99,8 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="password" />
 
             <EditText
                 android:id="@+id/login_activity_passwordconfirm"

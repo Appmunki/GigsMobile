@@ -27,6 +27,7 @@
     <string name="logging_in">Signing In</string>
     <string name="signing_up">Signing Up</string>
     <string name="title_activity_create_gig_form">CreateGigFormActivity</string>
+    <string name="title_activity_payment_gig_form">PaymentGigFormActivity</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="location">Location</string>
@@ -69,5 +70,10 @@
     <string name="action_messages">Messages</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_message">MessageActivity</string>
+    <string name="card_number">Card Number</string>
+    <string name="exp_month">Month</string>
+    <string name="exp_year">Year</string>
+    <string name="cvc">CVC</string>
+    <string name="amount">Amount</string>
 
 </resources>

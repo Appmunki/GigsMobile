@@ -37,4 +37,16 @@
       <item name="android:textStyle">bold</item>
 
   </style>
+
+    <style name="ExpMonth">
+        <item name="android:entries">@array/month_array</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="ExpYear">
+        <item name="android:entries">@array/year_array</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.8</item>
+    </style>
 </resources>

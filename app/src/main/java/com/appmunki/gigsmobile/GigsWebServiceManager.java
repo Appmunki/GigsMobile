@@ -2,6 +2,7 @@ package com.appmunki.gigsmobile;
 
 import android.util.Log;
 
+import com.appmunki.gigsmobile.models.Payment;
 import com.appmunki.gigsmobile.models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,7 +45,6 @@ public class GigsWebServiceManager {
         }
     };
 
-
     /**
      *
      */
@@ -60,7 +60,8 @@ public class GigsWebServiceManager {
     /**
      * Location of the webserver
      */
-    public static String API_URL = "http://gigsbackend.herokuapp.com/api/v1";
+//    public static String API_URL = "http://gigsbackend.herokuapp.com/api/v1";
+    public static String API_URL = "http://192.168.0.12:3000/api/v1";
 
     /**
      * Logger for the api
@@ -84,7 +85,7 @@ public class GigsWebServiceManager {
             .build();
     private static GigsWebService gigsWebService = null;
 
-    public static GigsWebService getInstance(){
+    public static GigsWebService getService(){
         if(gigsWebService==null)
             gigsWebService = restAdapter.create(GigsWebService.class);
         return gigsWebService;
@@ -106,6 +107,8 @@ public class GigsWebServiceManager {
                 Callback<Response> cb
         );
 
+
+
         /**
          * Get request to retrieve gigs from an user asynschronsly
          * @param email email of the gig owner
@@ -123,7 +126,6 @@ public class GigsWebServiceManager {
         @GET("/gigs")
         Response getUserGigs(@Header("X-User-Email") String email,@Header("X-User-Token") String authorization);
 
-
         /**
          * Workers rest calls
          */
@@ -136,6 +138,11 @@ public class GigsWebServiceManager {
         /**
          * Gigs rest calls
          */
+        @POST("/charges")
+        void charge(
+                @Body Payment payment,@Header("X-User-Email") String email,@Header("X-User-Token") String authorization,
+                Callback<Response> cb
+        );
     }
 
 

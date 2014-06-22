@@ -6,33 +6,21 @@ import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-
 import java.io.InputStream;
 import java.util.Random;
 
 /**
  * Created by radzell on 4/27/14.
  */
-@DatabaseTable(tableName = "gigs")
 public class Gig implements Parcelable {
-    @DatabaseField(index = true)
     private int id;
-    @DatabaseField
     private String title;
-    @DatabaseField
     private String description;
-    @DatabaseField
     private String status;
-    @DatabaseField
     private float lat;
-    @DatabaseField
     private float longit;
 
-    @DatabaseField
     private int employer_id;
-    @DatabaseField
     private String updated_at;
     private User mWorker;
 
@@ -124,5 +112,7 @@ public class Gig implements Parcelable {
     public float getLongitude(){return longit;}
     public float getLatitude(){return lat;}
     
+
+    public int getId(){return id;}
 
 }
