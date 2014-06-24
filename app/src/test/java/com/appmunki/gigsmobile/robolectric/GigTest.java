@@ -2,6 +2,7 @@ package com.appmunki.gigsmobile.robolectric;
 
 import android.util.Log;
 
+
 import com.appmunki.gigsmobile.controllers.MainActivity;
 import com.appmunki.gigsmobile.helpers.DatabaseHelper;
 import com.appmunki.gigsmobile.models.Gig;
@@ -11,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -27,7 +29,8 @@ import static junit.framework.Assert.assertTrue;
  */
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
-public class GigTest{
+
+public class GigTest {
     private final String TAG = this.getClass().getSimpleName();
     private MainActivity activity;
     private Dao<Gig, Integer> gigDao;
@@ -51,12 +54,16 @@ public class GigTest{
         gigDao.deleteById(1);
     }
 
+
+
+
+
+
+
     @Test
-    public void testDataHelper() throws SQLException{
-        Log.i(TAG,"testDataHelper");
-        assertNotNull(databaseHelper);
-        assertTrue(databaseHelper.isOpen());
-        assertTrue(gigDao.isTableExists());
+    public void testDataHelper(){
+         assertNotNull(databaseHelper);
+         assertTrue(databaseHelper.isOpen());
     }
 
     @Test
@@ -126,6 +133,7 @@ public class GigTest{
     public void testUpdateGig() throws SQLException{
         Log.i(TAG, "testUpdatedGig");
 
+
         Date today = new Date();
 
         // get our dao
@@ -150,6 +158,7 @@ public class GigTest{
         Gig gig = gigDao.queryForId(1);
         assertTrue(gig != null);
         gig.setLocation(11.445f, 11.2233f);
+
         gig.setWorkerID(20);
         gig.setUpdatedAt(now);
         gigDao.update(gig);
@@ -173,6 +182,7 @@ public class GigTest{
     @Test
     public void testDeleteGig() throws SQLException{
         Log.i(TAG,"testDeleteGig");
+
         Date today = new Date();
 
         // get our dao
@@ -197,6 +207,7 @@ public class GigTest{
         Gig gig = gigDao.queryForId(1);
         assertTrue(gig == null);
     }
+
 
 
 }
