@@ -34,9 +34,10 @@ public class Gig implements Parcelable{
     @DatabaseField(canBeNull = true)
     private int worker_id;
     @DatabaseField(canBeNull = true)
+
     private int employer_id;
-    @DatabaseField
-    private String updated_at;
+    @DatabaseField(dataType = DataType.DATE_LONG)
+    private Date updated_at;
 
 
     public Gig(){
@@ -49,7 +50,8 @@ public class Gig implements Parcelable{
         description = in.readString();
         status = in.readString();
         employer_id = Integer.parseInt(in.readString());
-        updated_at = new Date(in.readString()).toString();
+
+        updated_at = new Date(in.readString());
     }
 
     @Override
@@ -140,7 +142,8 @@ public class Gig implements Parcelable{
     }
 
     public void setUpdatedAt(Date updatedAt){
-        this.updated_at = updatedAt.toString();
+
+        this.updated_at = updatedAt;
     }
 
     public void setWorkerID(int workerID){
@@ -164,7 +167,8 @@ public class Gig implements Parcelable{
     }
 
     public Date getUpdatedAt(){
-        return new Date(updated_at);
+
+        return updated_at;
     }
 
     public int getID(){

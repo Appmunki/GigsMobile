@@ -59,6 +59,7 @@ public class BaseActivity extends Activity{
     public DatabaseHelper getDatabaseHelper() {
         if (databaseHelper == null) {
             databaseHelper = new DatabaseHelper(this);
+
         }
         return databaseHelper;
     }
