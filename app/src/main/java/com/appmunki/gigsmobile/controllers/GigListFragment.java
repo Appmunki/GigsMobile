@@ -99,8 +99,10 @@ public class GigListFragment extends Fragment implements AbsListView.OnItemClick
         }
         ArrayList<Gig> gigsList = new ArrayList<Gig>();
         mGigAdapter = new GigAdapter(getActivity(), R.layout.gig_list_item, gigsList);
-        GigsWebServiceManager.getInstance().getUserGigs(UserManager.getCurrentUser().getEmail(), UserManager.getCurrentUser().getAuthToken(), ListGigsCallback);
 
+        if(UserManager.getCurrentUser()!=null){
+            GigsWebServiceManager.getInstance().getUserGigs(UserManager.getCurrentUser().getEmail(), UserManager.getCurrentUser().getAuthToken(), ListGigsCallback);
+        }
 
     }
 

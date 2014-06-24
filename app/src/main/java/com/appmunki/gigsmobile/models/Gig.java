@@ -7,43 +7,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Random;
 
 /**
  * Created by radzell on 4/27/14.
  */
 public class Gig implements Parcelable {
-    @DatabaseField(index =true)
+    @DatabaseField( id=true)
     private int id;
     @DatabaseField
     private String title;
-    @DatabaseField
+    @DatabaseField(canBeNull=true)
     private String description;
-    @DatabaseField(index = true)
+    @DatabaseField
     private String status;
-    @DatabaseField
+    @DatabaseField(canBeNull=true)
     private float lat;
-    @DatabaseField
+    @DatabaseField(canBeNull=true)
     private float longit;
-    @DatabaseField
+    @DatabaseField(canBeNull=true)
     private int worker_id;
-    @DatabaseField
+    @DatabaseField(canBeNull=true)
     private int employer_id;
-    @DatabaseField
-    private String updated_at;
+    @DatabaseField(dataType = DataType.DATE_LONG)
+    private Date updated_at;
 
-    private User mWorker;
 
     public Gig(){
-        //TODO: remove after testing
-        Random random = new Random();
-        id = random.nextInt(3);
 
-        lat = random.nextFloat()*200;
-        longit = random.nextFloat()*200;
     }
     public Gig(Parcel in){
         id = in.readInt();
@@ -51,7 +47,7 @@ public class Gig implements Parcelable {
         description = in.readString();
         status = in.readString();
         employer_id = Integer.parseInt(in.readString());
-        updated_at = in.readString();
+        updated_at = new Date(in.readString());
     }
     @Override
     public String toString() {
@@ -74,7 +70,7 @@ public class Gig implements Parcelable {
         out.writeString(description);
         out.writeString(status);
         out.writeString(String.valueOf(employer_id));
-        out.writeString(updated_at);
+        out.writeString(updated_at.toString());
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -114,9 +110,6 @@ public class Gig implements Parcelable {
         return 0;
     }
 
-    public User getWorker() {
-        return mWorker;
-    }
 
     public void setLocation(float latitude, float longitude){
         this.lat = latitude;
@@ -138,7 +131,7 @@ public class Gig implements Parcelable {
         this.status = status;
     }
 
-    public void setUpdatedAt(String updatedAt){
+    public void setUpdatedAt(Date updatedAt){
         this.updated_at = updatedAt;
     }
 
@@ -162,7 +155,7 @@ public class Gig implements Parcelable {
         return worker_id;
     }
 
-    public String getUpdatedAt(){
+    public Date getUpdatedAt(){
         return updated_at;
     }
 

@@ -44,7 +44,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug{
-            applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
         }
     }
