@@ -18,12 +18,10 @@ import java.sql.SQLException;
  * Created by radzell on 6/17/14.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
-    // name of the database file for your application -- change to something appropriate for your app
-    public static final String DATABASE_NAME = "gigDatabase.db";
-    // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 6;
+    public static final String DATABASE_NAME = "gigsDatabase.db";
+    private static final int DATABASE_VERSION = 1;
 
-    // the DAO object we use to access the SimpleData table
+    // the DAO object we use to access the Gig table
     private RuntimeExceptionDao<Gig, Integer> gigRuntimeDao = null;
     private Dao<Gig,Integer> gigDao=null;
     public DatabaseHelper(Context context){

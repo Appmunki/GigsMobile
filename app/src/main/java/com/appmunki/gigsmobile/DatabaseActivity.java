@@ -22,7 +22,6 @@ public class DatabaseActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        doSampleDatabaseStuff("",null);
         setContentView(R.layout.activity_database);
     }
 
@@ -46,20 +45,5 @@ public class DatabaseActivity extends BaseActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Do our sample database stuff as an example.
-     */
-    private void doSampleDatabaseStuff(String action, TextView tv) {
-        try {
-            // get our dao
-            Dao<Gig, Integer> gigDao = getDatabaseHelper().getGigDataDao();
-            // query for all of the data objects in the database
-            List<Gig> list = gigDao.queryForAll();
 
-        } catch (SQLException e) {
-            Log.e("", "Database exception", e);
-            tv.setText("Database exeption: " + e);
-            return;
-        }
-    }
 }

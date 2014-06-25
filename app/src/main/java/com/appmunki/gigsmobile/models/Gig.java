@@ -8,6 +8,7 @@ import android.os.Parcelable;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Random;
 /**
  * Created by radzell on 4/27/14.
  */
+@DatabaseTable(tableName = "gigsTable")
 public class Gig implements Parcelable{
     @DatabaseField(id = true)
     private int id;
@@ -33,8 +35,8 @@ public class Gig implements Parcelable{
     private int worker_id;
     @DatabaseField(canBeNull = true)
     private int employer_id;
-    @DatabaseField(dataType = DataType.DATE_LONG)
-    private Date updated_at;
+    @DatabaseField
+    private String updated_at;
 
 
     public Gig(){
@@ -47,7 +49,7 @@ public class Gig implements Parcelable{
         description = in.readString();
         status = in.readString();
         employer_id = Integer.parseInt(in.readString());
-        updated_at = new Date(in.readString());
+        updated_at = new Date(in.readString()).toString();
     }
 
     @Override
@@ -138,7 +140,7 @@ public class Gig implements Parcelable{
     }
 
     public void setUpdatedAt(Date updatedAt){
-        this.updated_at = updatedAt;
+        this.updated_at = updatedAt.toString();
     }
 
     public void setWorkerID(int workerID){
@@ -162,7 +164,7 @@ public class Gig implements Parcelable{
     }
 
     public Date getUpdatedAt(){
-        return updated_at;
+        return new Date(updated_at);
     }
 
     public int getID(){

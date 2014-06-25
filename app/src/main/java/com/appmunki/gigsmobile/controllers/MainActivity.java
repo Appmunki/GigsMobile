@@ -130,7 +130,6 @@ public class MainActivity extends BaseActivity implements GigListFragment
         if (savedInstanceState == null) {
             selectItem(1);
         }
-        Log.i(TAG, "state: " + savedInstanceState);
         getFragmentManager().addOnBackStackChangedListener(this);
     }
 
