@@ -46,9 +46,9 @@ public class GigTest{
 
 
     @After
-    public void teardown(){
+    public void teardown() throws SQLException{
         Log.i(TAG,"tearDown");
-
+        gigDao.deleteById(1);
     }
 
     @Test
@@ -79,11 +79,9 @@ public class GigTest{
         gig.setEmployerID(10);
         gig.setWorkerID(9);
         gig.setUpdatedAt(today);
-        Dao.CreateOrUpdateStatus saved = gigDao.createOrUpdate(gig);
-        Log.i("TAG", "saved: " + saved.getNumLinesChanged());
-        Log.i(TAG, "countOf:" + gigDao.countOf());
+        int saved = gigDao.create(gig);
         assertEquals(saved, 1);
-
+        assertEquals(gigDao.countOf(),1);
 
     }
 
@@ -124,7 +122,7 @@ public class GigTest{
 
     }
 
-    /*@Test
+    @Test
     public void testUpdateGig() throws SQLException{
         Log.i(TAG, "testUpdatedGig");
 
@@ -144,7 +142,9 @@ public class GigTest{
         createdgig.setEmployerID(10);
         createdgig.setWorkerID(9);
         createdgig.setUpdatedAt(today);
-        gigDao.createIfNotExists(createdgig);
+        int saved = gigDao.create(createdgig);
+        assertEquals(saved,1);
+
 
         Date now = new Date();
         Gig gig = gigDao.queryForId(1);
@@ -168,7 +168,6 @@ public class GigTest{
         assertEquals(gigUpdated.getEmployerID(), 10);
         assertEquals(gigUpdated.getWorkerID(), 20);
 
-        Log.i(TAG, "count" + gigDao.countOf());
     }
 
     @Test
@@ -190,14 +189,14 @@ public class GigTest{
         createdgig.setEmployerID(10);
         createdgig.setWorkerID(9);
         createdgig.setUpdatedAt(today);
-        gigDao.createIfNotExists(createdgig);
+        int saved  = gigDao.create(createdgig);
+        assertEquals(saved,1);
 
-
-        int saved = gigDao.deleteById(1);
-        assertEquals(saved, 1);
+        int deleted = gigDao.deleteById(1);
+        assertEquals(deleted, 1);
         Gig gig = gigDao.queryForId(1);
         assertTrue(gig == null);
-    }*/
+    }
 
 
 }
