@@ -21,8 +21,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     public static final String DATABASE_NAME = "gigsDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
-    // the DAO object we use to access the Gig table
-
     private RuntimeExceptionDao<Gig, Integer> gigRuntimeDao = null;
     private Dao<Gig,Integer> gigDao=null;
     public DatabaseHelper(Context context){

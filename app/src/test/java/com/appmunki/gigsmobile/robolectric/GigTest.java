@@ -2,7 +2,6 @@ package com.appmunki.gigsmobile.robolectric;
 
 import android.util.Log;
 
-
 import com.appmunki.gigsmobile.controllers.MainActivity;
 import com.appmunki.gigsmobile.helpers.DatabaseHelper;
 import com.appmunki.gigsmobile.models.Gig;
@@ -29,8 +28,8 @@ import static junit.framework.Assert.assertTrue;
  */
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
-
 public class GigTest {
+
     private final String TAG = this.getClass().getSimpleName();
     private MainActivity activity;
     private Dao<Gig, Integer> gigDao;
@@ -64,11 +63,13 @@ public class GigTest {
     public void testDataHelper(){
          assertNotNull(databaseHelper);
          assertTrue(databaseHelper.isOpen());
+
     }
 
     @Test
     public void testCreateGig() throws SQLException{
         Log.i(TAG, "testCreateddGig");
+
 
 
         Date today = new Date();
@@ -134,6 +135,7 @@ public class GigTest {
         Log.i(TAG, "testUpdatedGig");
 
 
+
         Date today = new Date();
 
         // get our dao
@@ -177,6 +179,7 @@ public class GigTest {
         assertEquals(gigUpdated.getEmployerID(), 10);
         assertEquals(gigUpdated.getWorkerID(), 20);
 
+
     }
 
     @Test
@@ -207,6 +210,7 @@ public class GigTest {
         Gig gig = gigDao.queryForId(1);
         assertTrue(gig == null);
     }
+
 
 
 
