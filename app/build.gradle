@@ -2,13 +2,15 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        maven {        url 'https://github.com/rockerhieu/mvn-repo/raw/master/'}
+        maven { url 'https://github.com/rockerhieu/mvn-repo/raw/master/' }
 
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.11.+'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.1.0'
         classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.10.1-SNAPSHOT'
+        classpath 'com.github.goldin.plugins.gradle:duplicates:0.3'
+
     }
 }
 
@@ -23,8 +25,12 @@ allprojects {
 apply plugin: 'android'
 apply plugin: 'hugo'
 apply plugin: 'android-test'
+apply plugin: 'duplicates'
 
 
+duplicates {
+    configurations = [ 'compile', 'androidTestCompile' ]
+}
 android {
     useOldManifestMerger true
 
@@ -43,7 +49,7 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
-        debug{
+        debug {
             versionNameSuffix '-DEBUG'
         }
     }
@@ -71,8 +77,8 @@ androidTest {
 
 dependencies {
 
-    compile ('com.android.support:appcompat-v7:19.+')
-    compile ('com.android.support:support-v4:18.0.+'){
+    compile('com.android.support:appcompat-v7:19.+')
+    compile('com.android.support:support-v4:18.0.+') {
         force = true
     }
     compile "com.j256.ormlite:ormlite-android:4.45"
@@ -86,15 +92,16 @@ dependencies {
     debugCompile 'com.squareup.retrofit:retrofit-mock:1.5.0'
 
     compile files('libs/sinch-android-rtc-3.0.0.jar')
-    compile files('libs/androrm.jar')
     compile files('libs/espresso-1.1.jar')
     compile files('libs/testrunner-1.1.jar')
     compile files('libs/testrunner-runtime-1.1.jar')
 
-    androidTestCompile 'org.mockito:mockito-all:+'
 
 
+    androidTestCompile('org.mockito:mockito-all:+')
 
+
+    compile project(':stripe')
 
 
     compile 'com.jakewharton:butterknife:4.0.1'
@@ -105,13 +112,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.+'
 
     androidTestCompile('junit:junit:4.11') {
-        exclude module: 'hamcrest'
+        exclude module: 'hamcrest-core'
         exclude module: 'objenesis'
 
     }
-    androidTestCompile('org.robolectric:robolectric:2.3') {
-
-    }
+    androidTestCompile('org.robolectric:robolectric:2.3')
 
 }
 
@@ -124,8 +129,4 @@ idea {
         testOutputDir = file('build/test-classes/debug')
     }
 }
-println("--------------------Test-----------------")
-String currentDir = new File("**/*").getAbsolutePath()
-println(currentDir)
-println(androidTest)
-println("--------------------EndTest-----------------")
+

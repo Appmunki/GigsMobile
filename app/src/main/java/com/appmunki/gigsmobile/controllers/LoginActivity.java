@@ -133,11 +133,7 @@ public class LoginActivity extends BaseAuthenticatorActivity implements LoaderCa
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mUserTypeView.setAdapter(adapter);
 
-        // Set up the login form.
-        //mEmailView.setText("radzell@appmunki.com");
-        //mPasswordView.setText("Radzell1");
-        //mConfirmPasswordView.setText("Radzell1");
-        //mEmailSignInButton.performClick();
+
     }
 
 
@@ -407,7 +403,7 @@ public class LoginActivity extends BaseAuthenticatorActivity implements LoaderCa
     @Subscribe
     public void onSignInError(AuthenticateUserErrorEvent event){
         clearErrors();
-
+        showProgress(false,"");
     }
     @Subscribe
     public void onSignInStart(AuthenticateUserStartEvent event){

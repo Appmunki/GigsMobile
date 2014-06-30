@@ -1,6 +1,5 @@
 #!/bin/bash
 #How you find clashes in dependicies
-VAR=$1
-echo $VAR
-echo $1
+TERM=$1
+echo $TERM
 gradle -q app:dependencies |  grep --color -E '^|${TERM}'
