@@ -6,7 +6,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.1.0'
         classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.10.1-SNAPSHOT'
         classpath 'com.github.goldin.plugins.gradle:duplicates:0.3'
@@ -98,7 +98,10 @@ dependencies {
 
 
 
-    androidTestCompile('org.mockito:mockito-all:+')
+    androidTestCompile('org.mockito:mockito-all:+'){
+       exclude group: 'org.' +
+               'hamcrest'
+    }
 
 
     compile project(':stripe')
