@@ -62,10 +62,7 @@
                 android:resource="@xml/authenticator" />
         </service>
 
-        <activity
-            android:name=".DatabaseActivity"
-            android:label="@string/title_activity_database" >
-        </activity>
+
     </application>
 
     <!-- To access Google+ APIs: -->
@@ -77,5 +74,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
 
 </manifest>
